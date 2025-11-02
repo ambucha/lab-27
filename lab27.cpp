@@ -17,6 +17,16 @@ void print(const string n, const tuple<int,string, string> d){
     cout << "\tCatchphrase: " << catchphrase << endl << endl;
 }
 
+// menu(): outputs the menu
+// arguments: nothign
+// returns nothing
+void menu(){
+    cout << "1. Increase Friendship" << endl;
+    cout << "2. Decrease Friendship" << endl;
+    cout << "3. Search for Villager" << endl;
+    cout << "4. Exit" << endl;
+} 
+
 int main() {
     // declarations
     // change the data stored to be a tuple instead of a vector, (int(friendship) string(species) string(catchphrase))
@@ -26,6 +36,20 @@ int main() {
     villagers["Audie"] = {10, "Human", "Zoo Wee Mama"}; // i j remembered this is friendship level 1-10 and not favorite number oops, let me change that
     villagers["Raymond"] = {7, "Beast", "Believe it!"};
     villagers.insert({"Marshal", {1, "Dwarf", "Ay caramba"}});
+
+    // imma make a menu function to output it, create an int for choice
+    int choice;
+    menu();
+    cin >> choice;
+    while(choice != 4){
+        if(choice > 4 || choice < 0){
+            cout << "Invalid choice try again: " << endl;
+            cin >> choice;
+        }
+        if(choice == 1){
+            
+        }
+    }
 
     // access the map using a range-based for loop
     cout << "Villagers and their data (range-based for loop):" << endl;
