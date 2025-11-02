@@ -2,6 +2,7 @@
 #include <map>
 #include <vector>
 #include <tuple>
+#include <string>
 using namespace std;
 
 // print() function to display the tuple data 
@@ -26,6 +27,7 @@ void menu(){
     cout << "4. Decrease Friendship" << endl;
     cout << "5. Search for Villager" << endl;
     cout << "6. Exit" << endl;
+    cout << "Enter choice: ";
 } 
 
 // friendship(): changes the friendship level of chosen villager
@@ -77,7 +79,7 @@ int main() {
 
     // my menu was running once then going infinite
     while(choice != 6){
-        
+
         // put menu and chocie inside
         menu();
         cin >> choice;
@@ -86,7 +88,41 @@ int main() {
             cout << "Invalid choice try again: " << endl;
             cin >> choice;
         }
-        if(choice == 3){
+        if(choice == 1){
+            // variables for new villager data
+            string newN;
+            int newF;
+            string newS;
+            string newC;      
+
+            // prompt for the new data
+            cout << "Villager name: ";
+            cin >> newN;
+            cout << "Friendship level: ";
+            cin >> newF;
+            cout << "Species: ";
+            cin >> newS;
+            cout << "Catchphrase: ";
+            getline(cin, newC);
+
+            // create new villager with given data
+            villagers[newN] = {newF,newS,newC};
+            cout << newN << " added." << endl;
+
+            // display all villagers
+            printAll(villagers);
+        }
+        else if(choice == 2){
+            string eliminated;
+            cout << "Villager to delete: ";
+            cin >> eliminated;
+
+            // erase given villager
+            villagers.erase(eliminated);
+
+            printAll(villagers);
+        }
+        else if(choice == 3){
             // are we meant to increase and decrease the level of everyones friendship or a chosen villager?
             // im going to go with the chosen villager option
             cout << "Villager to increase frienship:" << endl;
