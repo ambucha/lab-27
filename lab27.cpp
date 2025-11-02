@@ -4,23 +4,29 @@
 #include <tuple>
 using namespace std;
 
+//
+void print(const string n, const tuple<int,string, string> d){
+    int friendship = get<0>(d);
+    string species = get<1>(d);
+    string catchphrase = get<2>(d);
+    cout << n << ": " << endl;
+    cout << "\tF"
+}
+
 int main() {
     // declarations
     // change the data stored to be a tuple instead of a vector, (int(friendship) string(species) string(catchphrase))
     map<string, tuple<int,string,string>> villagers;
 
     //insert three elements into the map
-    villagers["Audie"] = {11, "Human", "Zoo Wee Mama"};
+    villagers["Audie"] = {10, "Human", "Zoo Wee Mama"}; // i j remembered this is friendship level 1-10 and not favorite number oops, let me change that
     villagers["Raymond"] = {7, "Beast", "Believe it!"};
     villagers.insert({"Marshal", {1, "Dwarf", "Ay caramba"}});
 
     // access the map using a range-based for loop
-    cout << "Villagers and their favorite colors (range-based for loop):" << endl;
+    cout << "Villagers and their data (range-based for loop):" << endl;
     for (auto pair : villagers) {
-        cout << pair.first << ": ";
-        for (auto color : pair.second)
-            cout << color << " ";
-        cout << endl;
+        // imma need to make a function to call to print these
     }
 
     // access the map using iterators
