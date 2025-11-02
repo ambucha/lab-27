@@ -11,20 +11,21 @@ void print(const string n, const tuple<int,string, string> d){
     int friendship = get<0>(d);
     string species = get<1>(d);
     string catchphrase = get<2>(d);
-    cout << n << ": " << endl;
-    cout << "\tFriendship Level: " << friendship << endl;
-    cout << "\tSpecies: " << species << endl;
-    cout << "\tCatchphrase: " << catchphrase << endl << endl;
+    // imma change the output to look like the sample, it just takes up too much space atm
+    cout << n << ": " << "[" << friendship << ", " << species << ", " << catchphrase << "]" << endl;
 }
 
 // menu(): outputs the menu
 // arguments: nothign
 // returns nothing
 void menu(){
-    cout << "1. Increase Friendship" << endl;
-    cout << "2. Decrease Friendship" << endl;
-    cout << "3. Search for Villager" << endl;
-    cout << "4. Exit" << endl;
+    cout << endl;
+    cout << "1. Add Villager" << endl;
+    cout << "2. Delete Villager" << endl;
+    cout << "3. Increase Friendship" << endl;
+    cout << "4. Decrease Friendship" << endl;
+    cout << "5. Search for Villager" << endl;
+    cout << "6. Exit" << endl;
 } 
 
 // friendship(): changes the friendship level of chosen villager
@@ -75,17 +76,17 @@ int main() {
     string name;
 
     // my menu was running once then going infinite
-    while(choice != 4){
-
+    while(choice != 6){
+        
         // put menu and chocie inside
         menu();
         cin >> choice;
 
-        if(choice > 4 || choice < 0){
+        if(choice > 6 || choice < 0){
             cout << "Invalid choice try again: " << endl;
             cin >> choice;
         }
-        if(choice == 1){
+        if(choice == 3){
             // are we meant to increase and decrease the level of everyones friendship or a chosen villager?
             // im going to go with the chosen villager option
             cout << "Villager to increase frienship:" << endl;
@@ -95,13 +96,13 @@ int main() {
             // imma need to make a print all function
             printAll(villagers);
         }
-        else if(choice == 2){
+        else if(choice == 4){
             cout << "Villager to decrease frienship:" << endl;
             cin >> name;
             friendship(villagers, name, -1);
             printAll(villagers);
         }
-        else if(choice == 3){
+        else if(choice == 5){
             cout << "Villager to search: ";
             cin >> name;
             auto it = villagers.find(name);
