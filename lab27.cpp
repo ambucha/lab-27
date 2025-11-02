@@ -27,6 +27,27 @@ void menu(){
     cout << "4. Exit" << endl;
 } 
 
+// friendship(): changes the friendship level of chosen villager
+// arguments: villager data, string for the name to search for, integer for wether or not to increase or decrease the friendship level
+void friendship(map<string, tuple<int,string,string>> villagers, const string n, int x){
+    auto it = villagers.find(n);
+    if (it != villagers.end()) {  // the iterator points to beyond the end of the map
+                                       // if searchKey is not found
+        // get the friendship level 
+        int fLevel = get<0>(it->second);
+        // add the either positive or negative 1 to the friend level
+        fLevel += x;
+        // check if f is now at one of the extremes, to keep it going too high or low
+        if (fLevel < 0){
+            fLevel = 0;
+        }
+        if (fLevel > 10){
+            fLevel = 10;
+        }
+    } else
+        cout << endl << n << " not found." << endl;
+}
+
 int main() {
     // declarations
     // change the data stored to be a tuple instead of a vector, (int(friendship) string(species) string(catchphrase))
@@ -47,7 +68,10 @@ int main() {
             cin >> choice;
         }
         if(choice == 1){
-            
+            // are we meant to increase and decrease the level of everyones friendship or a chosen villager?
+            // im going to go with the chosen villager option
+            cout << "Villager to increase frienship:" << endl;
+            // imma need to make a function to change the friendship levels
         }
     }
 
