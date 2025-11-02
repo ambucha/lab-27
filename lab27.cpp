@@ -102,12 +102,13 @@ int main() {
             cin >> newF;
             cout << "Species: ";
             cin >> newS;
+            cin.ignore();
             cout << "Catchphrase: ";
             getline(cin, newC);
 
             // create new villager with given data
             villagers[newN] = {newF,newS,newC};
-            cout << newN << " added." << endl;
+            cout << newN << " added." << endl << endl;
 
             // display all villagers
             printAll(villagers);
