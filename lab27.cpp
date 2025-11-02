@@ -29,12 +29,14 @@ void menu(){
 
 // friendship(): changes the friendship level of chosen villager
 // arguments: villager data, string for the name to search for, integer for wether or not to increase or decrease the friendship level
-void friendship(map<string, tuple<int,string,string>> villagers, const string n, int x){
+// returns nothing
+// hold up im not changing anything i need to make this pass by reference
+void friendship(map<string, tuple<int,string,string>>& villagers, const string n, int x){
     auto it = villagers.find(n);
     if (it != villagers.end()) {  // the iterator points to beyond the end of the map
                                        // if searchKey is not found
         // get the friendship level 
-        int fLevel = get<0>(it->second);
+        int& fLevel = get<0>(it->second);
         // add the either positive or negative 1 to the friend level
         fLevel += x;
         // check if f is now at one of the extremes, to keep it going too high or low
@@ -60,6 +62,8 @@ int main() {
 
     // imma make a menu function to output it, create an int for choice
     int choice;
+    string name;
+
     menu();
     cin >> choice;
     while(choice != 4){
@@ -71,7 +75,27 @@ int main() {
             // are we meant to increase and decrease the level of everyones friendship or a chosen villager?
             // im going to go with the chosen villager option
             cout << "Villager to increase frienship:" << endl;
+            cin >> name;
             // imma need to make a function to change the friendship levels
+            friendship(villagers, name, 1);
+            // imma need to make a print all function
+        }
+        else if(choice == 2){
+            cout << "Villager to increase frienship:" << endl;
+            cin >> name;
+            friendship(villagers, name, -1);
+        }
+        else if(choice == 3){
+            cout << "Villager to search: ";
+            cin >> name;
+            auto it = villagers.find(name);
+            if (it != villagers.end()) {  // the iterator points to beyond the end of the map
+                                       // if searchKey is not found
+                cout << "\nFound " << name << "'s data: ";
+                // use print function again
+                print(it->first, it->second);
+            } else
+            cout << endl << name << " not found." << endl;
         }
     }
 
@@ -95,17 +119,6 @@ int main() {
 
     // delete an element, should be the same just change the name
     villagers.erase("Raymond");
-
-    // search for an element using .find() to avoid errors
-    string searchKey = "Audie";
-    auto it = villagers.find(searchKey);
-    if (it != villagers.end()) {  // the iterator points to beyond the end of the map
-                                       // if searchKey is not found
-        cout << "\nFound " << searchKey << "'s data: ";
-        // use print function again
-        print(it->first, it->second);
-    } else
-        cout << endl << searchKey << " not found." << endl;
 
     // report size, clear, report size again to confirm map operations
     cout << "\nSize before clear: " << villagers.size() << endl;
