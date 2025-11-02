@@ -50,6 +50,16 @@ void friendship(map<string, tuple<int,string,string>>& villagers, const string n
         cout << endl << n << " not found." << endl;
 }
 
+// printAll(): print all the villagers
+// arguments: map
+// returns nothing
+void printAll(const map<string, tuple<int,string,string>>& v) {
+    cout << "Villager details: " << endl;
+    for(auto i : v){
+        print(i.first, i.second);
+    }
+}
+
 int main() {
     // declarations
     // change the data stored to be a tuple instead of a vector, (int(friendship) string(species) string(catchphrase))
@@ -61,12 +71,16 @@ int main() {
     villagers.insert({"Marshal", {1, "Dwarf", "Ay caramba"}});
 
     // imma make a menu function to output it, create an int for choice
-    int choice;
+    int choice = 0;
     string name;
 
-    menu();
-    cin >> choice;
+    // my menu was running once then going infinite
     while(choice != 4){
+
+        // put menu and chocie inside
+        menu();
+        cin >> choice;
+
         if(choice > 4 || choice < 0){
             cout << "Invalid choice try again: " << endl;
             cin >> choice;
@@ -79,11 +93,13 @@ int main() {
             // imma need to make a function to change the friendship levels
             friendship(villagers, name, 1);
             // imma need to make a print all function
+            printAll(villagers);
         }
         else if(choice == 2){
-            cout << "Villager to increase frienship:" << endl;
+            cout << "Villager to decrease frienship:" << endl;
             cin >> name;
             friendship(villagers, name, -1);
+            printAll(villagers);
         }
         else if(choice == 3){
             cout << "Villager to search: ";
@@ -96,34 +112,9 @@ int main() {
                 print(it->first, it->second);
             } else
             cout << endl << name << " not found." << endl;
+            printAll(villagers);
         }
     }
-
-    // access the map using a range-based for loop
-    cout << "Villagers and their data (range-based for loop):" << endl;
-    for (auto pair : villagers) {
-        // imma need to make a function to call to print these
-        print(pair.first, pair.second);
-    }
-
-    // access the map using iterators
-    cout << "\nVillagers and their data (iterators):" << endl;
-    // change it to tuple instead of vector
-    for (map<string, tuple<int,string,string>>::iterator it = villagers.begin(); 
-                                               it != villagers.end(); ++it) {
-        cout << it->first << ": ";
-        // use the print function created earlier but now using iterators
-        print(it->first,it->second);
-        cout << endl;
-    }
-
-    // delete an element, should be the same just change the name
-    villagers.erase("Raymond");
-
-    // report size, clear, report size again to confirm map operations
-    cout << "\nSize before clear: " << villagers.size() << endl;
-    villagers.clear();
-    cout << "Size after clear: " << villagers.size() << endl;
 
     return 0;
 }
